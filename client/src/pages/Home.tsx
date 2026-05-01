@@ -29,6 +29,15 @@ export default function Home() {
     }
   };
 
+  const handleProjectClick = (scrollTo: string | null) => {
+    if (scrollTo) {
+      const element = document.getElementById(scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation Header */}
@@ -119,18 +128,21 @@ export default function Home() {
                 description: "A platformer game designed with logic, animation, and interactive controls.",
                 tools: "Scratch",
                 icon: Gamepad2,
+                scrollTo: "games",
               },
               {
                 title: "Python Program",
                 description: "A coding project that helped me practice variables, logic, and debugging.",
                 tools: "Python",
                 icon: Terminal,
+                scrollTo: "python",
               },
               {
                 title: "Portfolio Website",
                 description: "A personal website created to present my skills, projects, and goals.",
                 tools: "HTML, CSS, JavaScript",
                 icon: Code2,
+                scrollTo: null,
               },
             ].map((project, idx) => {
               const Icon = project.icon;
@@ -143,7 +155,14 @@ export default function Home() {
                   <h3 className="mb-3">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">{project.description}</p>
                   <p className="text-sm font-semibold text-accent mb-6">Tools: {project.tools}</p>
-                  <Button variant="outline" size="sm" className="w-full">View Project</Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full cursor-pointer"
+                    onClick={() => handleProjectClick(project.scrollTo)}
+                  >
+                    View Project
+                  </Button>
                 </div>
               );
             })}

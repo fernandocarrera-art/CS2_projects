@@ -56,8 +56,28 @@ export default function Home() {
         return;
       }
 
-      const result = await pyodide.runPythonAsync(pythonCode);
-      setPythonOutput(String(result) || 'Code executed successfully!');
+      // Capture output by wrapping code with StringIO
+      const wrappedCode = `
+import sys
+from io import StringIO
+
+old_stdout = sys.stdout
+sys.stdout = StringIO()
+
+try:
+${pythonCode.split('\n').map(line => '    ' + line).join('\n')}
+    result = sys.stdout.getvalue()
+except Exception as e:
+    result = f'Error: {e}'
+finally:
+    sys.stdout = old_stdout
+
+result
+`;
+      const output = await pyodide.runPythonAsync(wrappedCode);
+      const outputStr = String(output).trim();
+      setPythonOutput(outputStr || 'Code executed successfully!');
+
     } catch (error) {
       setPythonOutput(`Error: ${error instanceof Error ? error.message : String(error)}`);
     } finally {

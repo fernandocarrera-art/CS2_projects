@@ -280,6 +280,8 @@ export default function Home() {
                   scrolling="no"
                   allowFullScreen
                   className="rounded-lg"
+                  style={{ border: 'none' }}
+                  {...({ allowtransparency: 'true' } as any)}
                 />
               </div>
             )}

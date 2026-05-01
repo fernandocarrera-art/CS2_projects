@@ -43,74 +43,76 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
+  /* Modern Minimalist Tech - Light Theme */
+  --primary: #14b8a6;
+  --primary-foreground: #f8fafc;
+  --sidebar-primary: #14b8a6;
+  --sidebar-primary-foreground: #f8fafc;
+  --chart-1: #14b8a6;
+  --chart-2: #0d9488;
+  --chart-3: #0f766e;
+  --chart-4: #134e4a;
+  --chart-5: #0f2f2e;
+  --radius: 0.5rem;
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.15 0.01 65);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
+  --card-foreground: oklch(0.15 0.01 65);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --popover-foreground: oklch(0.15 0.01 65);
+  --secondary: oklch(0.95 0.002 0);
+  --secondary-foreground: oklch(0.25 0.01 65);
+  --muted: oklch(0.92 0.002 0);
+  --muted-foreground: oklch(0.45 0.01 65);
+  --accent: #14b8a6;
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --border: oklch(0.9 0.002 0);
+  --input: oklch(0.95 0.002 0);
+  --ring: #14b8a6;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.15 0.01 65);
+  --sidebar-accent: #14b8a6;
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.9 0.002 0);
+  --sidebar-ring: #14b8a6;
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
+  /* Modern Minimalist Tech - Dark Theme */
+  --primary: #14b8a6;
+  --primary-foreground: #0f172a;
+  --sidebar-primary: #14b8a6;
+  --sidebar-primary-foreground: #0f172a;
+  --background: oklch(0.12 0.01 280);
+  --foreground: oklch(0.92 0.01 65);
+  --card: oklch(0.18 0.01 280);
+  --card-foreground: oklch(0.92 0.01 65);
+  --popover: oklch(0.18 0.01 280);
+  --popover-foreground: oklch(0.92 0.01 65);
+  --secondary: oklch(0.22 0.01 280);
+  --secondary-foreground: oklch(0.7 0.01 65);
+  --muted: oklch(0.25 0.01 280);
+  --muted-foreground: oklch(0.65 0.01 65);
+  --accent: #14b8a6;
+  --accent-foreground: oklch(0.12 0.01 280);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: #14b8a6;
+  --chart-1: #14b8a6;
+  --chart-2: #0d9488;
+  --chart-3: #0f766e;
+  --chart-4: #134e4a;
+  --chart-5: #0f2f2e;
+  --sidebar: oklch(0.18 0.01 280);
+  --sidebar-foreground: oklch(0.92 0.01 65);
+  --sidebar-accent: #14b8a6;
+  --sidebar-accent-foreground: oklch(0.12 0.01 280);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: #14b8a6;
 }
 
 @layer base {
@@ -119,6 +121,20 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+  }
+  h1 {
+    @apply text-4xl md:text-5xl font-bold tracking-tight;
+  }
+  h2 {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+  }
+  h3 {
+    @apply text-xl md:text-2xl font-semibold;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -172,6 +188,51 @@
       padding-left: 2rem; /* 32px - desktop padding */
       padding-right: 2rem;
       max-width: 1280px; /* Standard content width */
+    }
+  }
+
+  /* Modern Minimalist Tech - Custom Components */
+  .accent-line {
+    @apply w-1 h-12 bg-accent rounded-full;
+  }
+
+  .section-divider {
+    @apply h-px bg-border my-12;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-hover:hover {
+    @apply opacity-90 scale-[1.02];
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .float-subtle {
+    animation: floatSubtle 3s ease-in-out infinite;
+  }
+
+  @keyframes floatSubtle {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-3px);
     }
   }
 }

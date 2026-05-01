@@ -85,7 +85,11 @@ result
     }
   };
 
-  const handleProjectClick = (scrollTo: string | null) => {
+  const handleProjectClick = (scrollTo: string | null, openNewTab?: boolean) => {
+    if (openNewTab) {
+      window.open(window.location.href, '_blank');
+      return;
+    }
     if (scrollTo) {
       const element = document.getElementById(scrollTo);
       if (element) {
@@ -199,6 +203,7 @@ result
                 tools: "HTML, CSS, JavaScript",
                 icon: Code2,
                 scrollTo: null,
+                openNewTab: true,
               },
             ].map((project, idx) => {
               const Icon = project.icon;
@@ -215,7 +220,7 @@ result
                     variant="outline"
                     size="sm"
                     className="w-full cursor-pointer"
-                    onClick={() => handleProjectClick(project.scrollTo)}
+                    onClick={() => handleProjectClick(project.scrollTo, (project as any).openNewTab)}
                   >
                     View Project
                   </Button>

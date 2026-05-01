@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Moon, Sun, Code2, Gamepad2, Terminal } from "lucide-react";
-import { useState } from "react";
+import { Moon, Sun, Code2, Gamepad2, Terminal, Loader } from "lucide-react";
+import { useState, useEffect } from "react";
 
 /**
  * Modern Minimalist Tech Design
@@ -16,16 +16,52 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"scratch" | "python" | "web">("scratch");
   const [pythonCode, setPythonCode] = useState("# Write Python code here\nprint('Hello, World!')");
   const [pythonOutput, setPythonOutput] = useState("");
+  const [pyodideReady, setPyodideReady] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    const loadPyodide = async () => {
+      try {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js';
+        script.async = true;
+        script.onload = async () => {
+          const pyodide = await (window as any).loadPyodide();
+          (window as any).pyodide = pyodide;
+          setPyodideReady(true);
+        };
+        document.head.appendChild(script);
+      } catch (error) {
+        console.error('Failed to load Pyodide:', error);
+        setPythonOutput('Error: Failed to load Python runtime');
+      }
+    };
+    loadPyodide();
+  }, []);
 
   const handlePythonRun = async () => {
+    if (!pyodideReady) {
+      setPythonOutput('Python runtime is loading... Please wait a moment.');
+      return;
+    }
+
+    setIsRunning(true);
+    setPythonOutput('Running...');
+
     try {
-      const pyodide = await (window as any).loadPyodide?.();
-      if (pyodide) {
-        const output = await pyodide.runPythonAsync(pythonCode);
-        setPythonOutput(String(output) || "Code executed successfully!");
+      const pyodide = (window as any).pyodide;
+      if (!pyodide) {
+        setPythonOutput('Error: Python runtime not available');
+        setIsRunning(false);
+        return;
       }
+
+      const result = await pyodide.runPythonAsync(pythonCode);
+      setPythonOutput(String(result) || 'Code executed successfully!');
     } catch (error) {
-      setPythonOutput(`Error: ${error}`);
+      setPythonOutput(`Error: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      setIsRunning(false);
     }
   };
 
@@ -206,7 +242,10 @@ export default function Home() {
             <div className="w-1 h-12 bg-accent rounded-full" />
             <h2>Python Code Runner</h2>
           </div>
-          <p className="text-muted-foreground mb-8">Try running Python code directly in your browser! Write your code below and click "Run Code" to see the output.</p>
+          <p className="text-muted-foreground mb-8">
+            Try running Python code directly in your browser! Write your code below and click "Run Code" to see the output.
+            {!pyodideReady && " (Python runtime is loading...)"}
+          </p>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <label className="block text-sm font-semibold mb-2">Python Code</label>
@@ -215,19 +254,28 @@ export default function Home() {
                 onChange={(e) => setPythonCode(e.target.value)}
                 className="w-full h-64 p-4 bg-card border border-border rounded-lg font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="# Write Python code here"
+                disabled={!pyodideReady}
               />
               <Button
                 onClick={handlePythonRun}
-                className="mt-4 w-full bg-accent hover:bg-accent/90"
+                className="mt-4 w-full bg-accent hover:bg-accent/90 disabled:opacity-50"
+                disabled={!pyodideReady || isRunning}
               >
-                Run Code
+                {isRunning ? (
+                  <>
+                    <Loader className="mr-2 h-4 w-4 animate-spin" />
+                    Running...
+                  </>
+                ) : (
+                  "Run Code"
+                )}
               </Button>
             </div>
             <div>
               <label className="block text-sm font-semibold mb-2">Output</label>
-              <div className="w-full h-64 p-4 bg-card border border-border rounded-lg font-mono text-sm overflow-auto">
+              <div className="w-full h-64 p-4 bg-card border border-border rounded-lg font-mono text-sm overflow-auto whitespace-pre-wrap break-words">
                 {pythonOutput ? (
-                  <pre className="text-accent whitespace-pre-wrap break-words">{pythonOutput}</pre>
+                  <pre className="text-accent">{pythonOutput}</pre>
                 ) : (
                   <p className="text-muted-foreground">Output will appear here...</p>
                 )}

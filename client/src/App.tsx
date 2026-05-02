@@ -2,10 +2,18 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+
+// Handle GitHub Pages SPA redirect from 404.html
+if (typeof window !== 'undefined') {
+  const redirect = sessionStorage.redirect;
+  delete sessionStorage.redirect;
+  if (redirect && redirect !== location.href) {
+    history.replaceState(null, '', redirect);
+  }
+}
 
 function Router() {
   return (

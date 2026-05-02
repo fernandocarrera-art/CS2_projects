@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://fernandocarrera-art.github.io/CS2website/",
+  "homepage": "https://fernandocarrera-art.github.io/CS2_projects/",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",

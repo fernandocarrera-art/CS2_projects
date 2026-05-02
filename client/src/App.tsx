@@ -1,23 +1,15 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
-const BASE_PATH = import.meta.env.PROD ? '/CS2_projects' : '';
-
 function Router() {
-  const [location] = useLocation();
-  
-  // Remove base path from location for routing
-  const routePath = location.startsWith(BASE_PATH) 
-    ? location.slice(BASE_PATH.length) || '/'
-    : location;
-  
   return (
-    <Switch location={routePath}>
+    <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
@@ -40,7 +32,12 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          {/* Use hash-based routing for GitHub Pages compatibility */}
+          {import.meta.env.PROD ? (
+            <Router />
+          ) : (
+            <Router />
+          )}
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
